@@ -12,8 +12,6 @@ const razorpayRoute = require("./routes/razorpay");
 const Razorpay = require("razorpay");
 const shortid = require("shortid");
 const { options } = require("./routes/razorpay");
-const path = require("path");
-// const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 dotenv.config();
 app.use(express.json());
@@ -30,16 +28,6 @@ app.use("/api/products", productRoute);
 app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/checkout", razorpayRoute);
-
-app.use(
-  express.static(path.join(__dirname, "/api/client/build"))
-);
-
-app.get("*", (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "/api/client/build", "index.html")
-  );
-});
 
 app.listen(process.env.PORT || 8000, () => {
   console.log("server is running");
